@@ -2,6 +2,9 @@ import {
     attaquesPika,
     attaquesMagi
 } from './pokemon.js';
+import {
+    random
+} from './random.js';
 
 function combat(pokemonControle, pokemonEnnemi) {
     let x;
@@ -32,7 +35,7 @@ function combat(pokemonControle, pokemonEnnemi) {
         }
 
     } else {
-        y = prompt("Choisissez une attaque parmi celles-ci : " + attaquesMagi)
+        y = random(attaquesMagi)
         switch (y) {
             case "Coupdequeue":
                 pokemonEnnemi.coup_de_queue(pokemonControle);
@@ -53,49 +56,54 @@ function combat(pokemonControle, pokemonEnnemi) {
 
     //Tour 2 et suite
     while (pokemonControle.vie > 0 && pokemonEnnemi.vie > 0) {
-        x = prompt("Choisissez une attaque parmi celles-ci : " + attaquesPika)
-        switch (x) {
-            case "Fatalfoudre":
-                pokemonControle.fatal_foudre(pokemonEnnemi);
-                break;
-            case "Queuedefer":
-                pokemonControle.queue_de_fer(pokemonEnnemi);
+        if (pokemonEnnemi.vie <= 0) {
+            console.log(pokemonEnnemi.nom + " meurt dans la bataille")
+            alert(pokemonEnnemi.nom + " meurt dans la bataille")
+        } else if (pokemonControle.vie <= 0) {
+            console.log(pokemonControle.nom + " meurt dans la bataille")
+            alert(pokemonControle.nom + " meurt dans la bataille")
+        } else {
+            x = prompt("Choisissez une attaque parmi celles-ci : " + attaquesPika)
+            if (pokemonControle.vie > 0) {
+                switch (x) {
+                    case "Fatalfoudre":
+                        pokemonControle.fatal_foudre(pokemonEnnemi);
+                        break;
+                    case "Queuedefer":
+                        pokemonControle.queue_de_fer(pokemonEnnemi);
 
-                break;
-            case "Charge":
-                pokemonControle.charge(pokemonEnnemi);
-                break;
-            case "Quickattack":
-                pokemonControle.quick_attack(pokemonEnnemi);
-                break;
-            default:
-                alert("ce n'est pas une attaque valide")
-                x = prompt("Choisissez une attaque parmi celles-ci : " + attaquesPika)
-                break;
+                        break;
+                    case "Charge":
+                        pokemonControle.charge(pokemonEnnemi);
+                        break;
+                    case "Quickattack":
+                        pokemonControle.quick_attack(pokemonEnnemi);
+                        break;
+                    default:
+                        alert("ce n'est pas une attaque valide")
+                        x = prompt("Choisissez une attaque parmi celles-ci : " + attaquesPika)
+                        break;
+                }
+            }
+            if (pokemonEnnemi.vie > 0) {
+                y = random(attaquesMagi)
+                switch (y) {
+                    case "Coupdequeue":
+                        pokemonEnnemi.coup_de_queue(pokemonControle);
+                        break;
+                    case "Trempette":
+                        pokemonEnnemi.trempette();
+                        break;
+                    case "Charge":
+                        pokemonEnnemi.charge(pokemonControle);
+                        break;
+                    default:
+                        alert("ce n'est pas une attaque valide")
+                        y = prompt("Choisissez une attaque parmi celles-ci : " + attaquesMagi)
+                        break;
+                }
+            }
         }
-        y = prompt("Choisissez une attaque parmi celles-ci : " + attaquesMagi)
-        switch (y) {
-            case "Coupdequeue":
-                pokemonEnnemi.coup_de_queue(pokemonControle);
-                break;
-            case "Trempette":
-                pokemonEnnemi.trempette();
-                break;
-            case "Charge":
-                pokemonEnnemi.charge(pokemonControle);
-                break;
-            default:
-                alert("ce n'est pas une attaque valide")
-                y = prompt("Choisissez une attaque parmi celles-ci : " + attaquesMagi)
-                break;
-        }
-    }
-
-    if (pokemonEnnemi.vie <= 0) {
-        alert( pokemonEnnemi.nom + " meurt dans la bataille")
-    }
-    else if(pokemonControle.vie <= 0){
-        alert( pokemonControle.nom + " meurt dans la bataille")
     }
 
 }

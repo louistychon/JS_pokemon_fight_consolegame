@@ -8,9 +8,6 @@ class pokemon {
         this.type2 = type2;
     }
 }
-
-let typesPokemon = ["Acier", "Dragon", "Electrique", "Feu", "Insecte", "Plantes", "Psy", "Sol", "Ténèbres", "Combat", "Eau", "Fée", "Glace", "Normal", "Poison", "Roche", "Spectre", "Vol", "Obscur", "inconnu"]
-
 class pikachuClass extends pokemon {
     constructor(nom, niveau, vie, vitesse, type1, type2) {
         super(nom, niveau, vie, vitesse, type1, type2)
@@ -18,7 +15,6 @@ class pikachuClass extends pokemon {
     fatal_foudre = (pokemonEnnemi) => {
         pokemonEnnemi.vie -= 25;
         console.log(pokemonEnnemi.nom + " perd 25 points de vie. Ses points de vie sont de " + pokemonEnnemi.vie)
-        
     }
     queue_de_fer = (pokemonEnnemi) => {
         pokemonEnnemi.vie -= 10;
@@ -33,8 +29,6 @@ class pikachuClass extends pokemon {
         console.log(pokemonEnnemi.nom + " perd 15 points de vie. Ses points de vie sont de " + pokemonEnnemi.vie)
     }
 }
-
-let attaquesPika = ["Fatalfoudre", "Queuedefer", "Charge", "Quickattack"]
 
 class magicarpeClass extends pokemon {
     constructor(nom, niveau, vie, vitesse, type1, type2) {
@@ -52,6 +46,10 @@ class magicarpeClass extends pokemon {
         console.log(this.nom + " lance charge et inflige 5 points de dégats à " + pokemonControle.nom + "a maintenant " + pokemonControle.vie + " points de vie")
     }
 }
+
+let typesPokemon = ["Acier", "Dragon", "Electrique", "Feu", "Insecte", "Plantes", "Psy", "Sol", "Ténèbres", "Combat", "Eau", "Fée", "Glace", "Normal", "Poison", "Roche", "Spectre", "Vol", "Obscur", "inconnu"]
+
+let attaquesPika = ["Fatalfoudre", "Queuedefer", "Charge", "Quickattack"]
 let attaquesMagi = ["Coupdequeue", "Trempette", "Charge"]
 let pikachu = new pikachuClass("Pikachu", 15, 100, 10, "Normal", "Electrique");
 let magicarpe = new magicarpeClass("Magicarpe", 11, 100, 10, "Eau", "Normal");
